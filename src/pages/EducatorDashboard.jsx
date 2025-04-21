@@ -12,7 +12,7 @@ export default function EducatorDashboard() {
     if (!userId)
         return
     <div className="text-center text-warning mt-5">
-        ⚠️ Please log in to continue
+        ⚠️ Please login to continue
     </div>;
 
     return (
