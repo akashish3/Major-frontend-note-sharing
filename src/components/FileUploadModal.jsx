@@ -16,7 +16,8 @@ export default function FileUploadModal({ onClose }) {
         formData.append('uploadTime', uploadTime);
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbyTbKHGZsZE9C2q1KWwBsChs4KcwgrQNBn08DsAi4nNXtGFpPbjPmAa8rNDC_EhXkXt/exec",
+            const response = await fetch
+            ("https://script.google.com/macros/s/AKfycbwcVIbbV91LV27CxNK294lq5FvNhbXlB72kPShvhTkHkXHybiO1vuz4iSInsdTPhmaY/exec",
                 //educator document link
                 {
                     method: "POST",
