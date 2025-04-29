@@ -11,6 +11,7 @@ export default function StudentDashboard() {
 
  useEffect(() => {
    fetch("https://script.google.com/macros/s/AKfycbyTbKHGZsZE9C2q1KWwBsChs4KcwgrQNBn08DsAi4nNXtGFpPbjPmAa8rNDC_EhXkXt/exec")
+   //educator document link
      .then((res) => res.json())
      .then((data) => {
        setNotes(data);

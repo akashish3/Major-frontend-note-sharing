@@ -17,6 +17,7 @@ export default function FileUploadModal({ onClose }) {
 
         try {
             const response = await fetch("https://script.google.com/macros/s/AKfycbyTbKHGZsZE9C2q1KWwBsChs4KcwgrQNBn08DsAi4nNXtGFpPbjPmAa8rNDC_EhXkXt/exec",
+                //educator document link
                 {
                     method: "POST",
                     body: formData,//no content type header needed;

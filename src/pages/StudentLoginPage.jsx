@@ -20,6 +20,7 @@ export default function StudentLoginPage() {
 
    const response = await fetch(
     `https://script.google.com/macros/s/AKfycbw2hIDLwLJ-Q8ZbLB8OFSZL8mlElUweGi6WQmlZmBCBqiDTOD501405YqKgPrGxErWuNQ/exec?userId=${userId}`
+    //note sharing login signup link
    );
    const data = await response.json();
 
