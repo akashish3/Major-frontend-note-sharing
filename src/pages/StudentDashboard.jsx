@@ -1,6 +1,6 @@
 // src/pages/StudentDashboard.jsx
 import React, { useEffect, useState } from 'react';
-import FileList from '../components/FileList';
+//import FileList from '../components/FileList';
 
 
 export default function StudentDashboard() {
@@ -22,7 +22,7 @@ export default function StudentDashboard() {
  if (!userId)
    return (
      <div className="text-center text-warning mt-5">
-       ⚠️ Please log in to continue
+       ⚠️ Please login to continue
      </div>
    );
 
