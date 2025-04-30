@@ -1,6 +1,6 @@
 // src/pages/StudentDashboard.jsx
 import React, { useEffect, useState } from 'react';
-//import FileList from '../components/FileList';
+import FileList from '../components/FileList';
 
 
 export default function StudentDashboard() {
