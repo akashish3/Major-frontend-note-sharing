@@ -87,7 +87,7 @@ export default function StudentDashboard() {
          )}
        </div>
      </div>
-     <FileList />
+     {/* <FileList /> */}
    </div>
  );
 }
