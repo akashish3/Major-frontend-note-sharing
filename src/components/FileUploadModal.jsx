@@ -17,7 +17,7 @@ export default function FileUploadModal({ onClose }) {
 
         try {
             const response = await fetch
-            ("https://script.google.com/macros/s/AKfycbwcVIbbV91LV27CxNK294lq5FvNhbXlB72kPShvhTkHkXHybiO1vuz4iSInsdTPhmaY/exec",
+            ("https://script.google.com/macros/s/AKfycbzpGZGKymxkAq0k2vS3gmTraiQntx_aYQ5D91IEM0j-14vszGt9OXsdIGQYEOwPnU3K/exec",
                 //educator document link
                 {
                     method: "POST",
