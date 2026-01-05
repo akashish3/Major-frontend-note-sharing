@@ -1,93 +1,96 @@
 // src/pages/StudentDashboard.jsx
-import React, { useEffect, useState } from 'react';
-import FileList from '../components/FileList';
-
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar"; // 👈 shared navbar
 
 export default function StudentDashboard() {
- const userId = localStorage.getItem('userId');
- const studentName = localStorage.getItem('studentName');
- const [notes, setNotes] = useState([]);
+  const userId = localStorage.getItem("userId");
+  const studentName = localStorage.getItem("studentName");
+  const [notes, setNotes] = useState([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzpGZGKymxkAq0k2vS3gmTraiQntx_aYQ5D91IEM0j-14vszGt9OXsdIGQYEOwPnU3K/exec"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setNotes(data);
+      })
+      .catch(() => {
+        alert("🚨 Failed to load notes. Please try again later.");
+      });
+  }, []);
 
- useEffect(() => {
-   fetch("https://script.google.com/macros/s/AKfycbzpGZGKymxkAq0k2vS3gmTraiQntx_aYQ5D91IEM0j-14vszGt9OXsdIGQYEOwPnU3K/exec")
-   //educator document link
-     .then((res) => res.json())
-     .then((data) => {
-       setNotes(data);
-     });
- }, []);
+  // If not logged in, block access
+  if (!userId) {
+    return (
+      <div className="text-center text-warning mt-5">
+        ⚠️ Please login to continue
+      </div>
+    );
+  }
 
+  return (
+    <div
+      className="min-vh-100"
+      style={{
+        background: "linear-gradient(to bottom right, #001f3f, #003366)",
+        color: "#FFD700",
+      }}
+    >
+      {/* 👇 Navbar with Logout */}
+      <Navbar />
 
- if (!userId)
-   return (
-     <div className="text-center text-warning mt-5">
-       ⚠️ Please login to continue
-     </div>
-   );
+      <div className="container py-5 animate__animated animate__fadeIn">
+        <div className="text-center mb-5">
+          <h2 className="fw-bold">Welcome, {studentName || userId} 🎓</h2>
+          <p className="lead">Explore all uploaded notes below</p>
+        </div>
 
-
- return (
-   <div
-     className="min-vh-100 py-5"
-     style={{
-       background: 'linear-gradient(to bottom right, #001f3f, #003366)',
-       color: '#FFD700',
-     }}
-   >
-     <div className="container animate__animated animate__fadeIn">
-       <div className="text-center mb-5">
-       <h2 className="fw-bold">Welcome, {studentName || userId} 🎓</h2>
-
-
-         <p className="lead">Explore all uploaded notes below</p>
-       </div>
-
-
-       <div className="row">
-         {notes.length === 0 ? (
-           <div className="text-center text-light">
-             <em>No notes available right now. Check back later!</em>
-           </div>
-         ) : (
-           notes.map((note, index) => (
-             <div
-               key={index}
-               className="col-md-4 mb-4 animate__animated animate__zoomIn"
-             >
-               <div
-                 className="card h-100 shadow-lg border-0"
-                 style={{
-                   backgroundColor: '#002b5c',
-                   color: '#FFD700',
-                 }}
-               >
-                 <div className="card-body">
-                   <h5 className="card-title">{note.batchName}</h5>
-                   <p className="card-text mb-1">
-                     <strong>By:</strong> {note.educatorName}
-                   </p>
-                   <p className="card-text">
-                     <small>{note.uploadTime}</small>
-                   </p>
-                 </div>
-                 <div className="card-footer bg-transparent border-0">
-                   <a
-                     href={note.fileUrl}
-                     target="_blank"
-                     rel="noreferrer"
-                     className="btn btn-outline-warning w-100"
-                   >
-                     📥 Download
-                   </a>
-                 </div>
-               </div>
-             </div>
-           ))
-         )}
-       </div>
-     </div>
-     {/* <FileList /> */}
-   </div>
- );
+        <div className="row">
+          {notes.length === 0 ? (
+            <div className="text-center text-light">
+              <em>No notes available right now. Check back later!</em>
+            </div>
+          ) : (
+            notes.map((note, index) => (
+              <div
+                key={index}
+                className="col-md-4 mb-4 animate__animated animate__zoomIn"
+              >
+                <div
+                  className="card h-100 shadow-lg border-0"
+                  style={{
+                    backgroundColor: "#002b5c",
+                    color: "#FFD700",
+                  }}
+                >
+                  <div className="card-body">
+                    <h5 className="card-title">{note.batchName}</h5>
+                    <p className="card-text mb-1">
+                      <strong>By:</strong> {note.educatorName}
+                    </p>
+                    <p className="card-text">
+                      <small>{note.uploadTime}</small>
+                    </p>
+                  </div>
+                  <div className="card-footer bg-transparent border-0">
+                    <a
+                      href={note.fileUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn btn-outline-warning w-100"
+                    >
+                      📥 Download
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }

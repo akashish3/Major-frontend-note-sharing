@@ -1,58 +1,39 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.animated-bg {
+  background: linear-gradient(-45deg, #001f3f, #003366, #004080, #002244);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Floating shapes */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.shape {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
+.shape:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+.shape:nth-child(2) { top: 40%; left: 70%; animation-delay: 2s; }
+.shape:nth-child(3) { top: 65%; left: 30%; animation-delay: 4s; }
+.shape:nth-child(4) { top: 80%; left: 80%; animation-delay: 6s; }
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -65,4 +46,34 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+.tooltip-helper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #FFD700;
+  margin-left: 6px;
+}
+
+.tooltip-helper .tooltip-text {
+  visibility: hidden;
+  width: 260px;
+  background-color: #003366;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -130px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.85rem;
+}
+
+.tooltip-helper:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
